@@ -1,0 +1,28 @@
+
+{
+  "name": "Sunspot",
+  "description": "",
+  "repository": "https://github.com/emptymalei/sunspot-academy",
+  "logo": "",
+  "keywords": ["flask", "vue"],
+  "env": {
+    "FLASK_ENV": {
+      "description": "Flask Enviroment",
+      "value": "production"
+    },
+    "SECRET": {
+      "description": "Flask Secret Key",
+      "value": "TheSecretKey"
+    }
+   },
+  "addons": [
+   ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "heroku/python"
+    }
+  ]
+}
