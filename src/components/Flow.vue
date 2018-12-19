@@ -1,45 +1,50 @@
 <template>
   <div class="flow">
-    <h2 class="title">
-      Sunspots
-    </h2>
-    <div v-for="r in flow" :key="r.datetime" style="margin-top:1em;">
-      <div class="card">
-        <header class="card-header is-vcentered">
-          <p class="card-header-title">
-            Random Sunspot
-          </p>
-          <a href="" @click.prevent="fetchRandomFlow" class="button is-dark is-outlined" style="margin-top: 0.4em;margin-right: 0.5em;">Fetch Another Random Sunspot</a>
-        </header>
-        <div class="card-content">
-          <div class="content">
-            {{ r.content }}
+    <article class="message is-warning">
+      <div class="message-header is-warning">
+        <p>Sunspots</p>
+      </div>
+      <div class="message-body">
+        <div v-for="r in flow" :key="r.datetime" style="margin-top:1em;">
+          <div class="card">
+            <header class="card-header is-vcentered">
+              <p class="card-header-title">
+                Random Sunspot
+              </p>
+              <a href="" @click.prevent="fetchRandomFlow" class="button is-dark is-outlined" style="margin-top: 0.4em;margin-right: 0.5em;">Fetch Another Random Sunspot</a>
+            </header>
+            <div class="card-content">
+              <div class="content">
+                {{ r.content }}
+              </div>
+            </div>
+            <footer class="card-footer">
+              <span class="card-footer-item">@{{ r.author }}</span>
+              <span href="#" class="card-footer-item"><time>{{ r.datetime }}</time></span>
+            </footer>
           </div>
         </div>
-        <footer class="card-footer">
-          <span class="card-footer-item">@{{ r.author }}</span>
-          <span href="#" class="card-footer-item"><time>{{ r.datetime }}</time></span>
-        </footer>
-      </div>
-    </div>
-    <div class="card">
-        <header class="card-header is-vcentered">
-          <p class="card-header-title">
-            Recent Sunspots
-          </p>
-        </header>
-        <div v-for="r in recent.slice().reverse()" :key="r.datetime">
-          <div class="card-content">
-            <div class="content">
-              {{ r.content }}
-            </div>
+        <hr>
+        <div class="card">
+            <header class="card-header is-vcentered">
+              <p class="card-header-title">
+                Recent Sunspots
+              </p>
+            </header>
+            <div v-for="r in recent.slice().reverse()" :key="r.datetime">
+              <div class="card-content">
+                <div class="content">
+                  {{ r.content }}
+                </div>
+              </div>
+              <footer class="card-footer" style="border-bottom:1px solid #dbdbdb;">
+                <span class="card-footer-item">@{{ r.author }}</span>
+                <span href="#" class="card-footer-item"><time>{{ r.datetime }}</time></span>
+              </footer>
           </div>
-          <footer class="card-footer" style="border-bottom:1px solid #dbdbdb;">
-            <span class="card-footer-item">@{{ r.author }}</span>
-            <span href="#" class="card-footer-item"><time>{{ r.datetime }}</time></span>
-          </footer>
+        </div>
       </div>
-    </div>
+    </article>
 
     <p class="is-warning">{{error}}</p>
     <div class="create-flow" style="margin-top:1em;">

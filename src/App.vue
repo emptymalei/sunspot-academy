@@ -19,7 +19,7 @@
           </a>
 
           <a class="navbar-item">
-            <router-link to="/api">Documentation</router-link>
+            <router-link to="/about">About</router-link>
           </a>
 
         </div>

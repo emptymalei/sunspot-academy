@@ -12,7 +12,7 @@
     },
     "SECRET": {
       "description": "Flask Secret Key",
-      "value": "TheSecretKey"
+      "value": "Secret"
     }
    },
   "addons": [

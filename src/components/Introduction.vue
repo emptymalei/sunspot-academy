@@ -1,15 +1,21 @@
 <template>
-  <div class="hello" style="text-align:left;margin-top:4em;">
-    <h1 class="subtitle">{{ msg }}</h1>
-    <p>
-       Anyone can release the dark side of the mind
-    </p>
-    <p>
-      It's like meditation: No one should be scared of the dark side of the mind.
-    </p>
-    <p>
-      One more thing, we do not track you.
-    </p>
+  <div style="text-align:left;">
+    <article class="message is-warning">
+      <div class="message-header is-warning">
+        <p class="has-text-centered">{{ msg }}</p>
+      </div>
+      <div class="message-body">
+        <p>
+          Anyone can release the dark side of the mind
+        </p>
+        <p>
+          It's like meditation: No one should be scared of the dark side of the mind.
+        </p>
+        <p>
+          One more thing, we do not track you.
+        </p>
+        </div>
+          </article>
 
   </div>
 </template>

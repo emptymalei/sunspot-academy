@@ -1,16 +1,8 @@
-### 0.3.0.post1
-* Updated Dependencies and Docs (#17)
+## 0.1.2
 
-### 0.3.0
-* Npm > Yarn
-* Updated to Flask 1.0
-* Clean up config, use env vars
-* Simplified client view
-* Flatten Templated Folder Structure
-* Removed Cli Commads
+1. Added background
+2. Remove docs
 
-### 0.2.3
-* Updated to Vue Cli 3
+## 0.0.1 - 0.1.1
 
-### 0.1.0
-* Initial Release
+Build the first working version
