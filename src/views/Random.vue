@@ -2,7 +2,7 @@
   <div class="container is-fluid home">
     <div class="columns">
       <div class="column">
-        <Flow/>
+        <Random/>
       </div>
     </div>
   </div>
@@ -10,12 +10,12 @@
 
 <script>
 // @ is an alias to /src
-import Flow from '@/components/Flow.vue'
+import Random from '@/components/Random.vue'
 
 export default {
-  name: 'home',
+  name: 'random',
   components: {
-    Flow
+    Random
   }
 }
 </script>

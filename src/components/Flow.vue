@@ -2,44 +2,24 @@
   <div class="flow">
     <article class="message is-warning">
       <div class="message-header is-warning">
-        <p>Sunspots</p>
+        <p> Recent Sunspots</p>
       </div>
       <div class="message-body">
-        <div v-for="r in flow" :key="r.datetime" style="margin-top:1em;">
-          <div class="card">
-            <header class="card-header is-vcentered">
+        <div v-for="r in recent.slice().reverse()" :key="r.datetime">
+          <div class="card" style="margin-top:1em; margin-bottom:1em;">
+              <header class="card-header is-vcentered">
               <p class="card-header-title">
-                Random Sunspot
+               {{ r.author }}:
               </p>
-              <a href="" @click.prevent="fetchRandomFlow" class="button is-dark is-outlined" style="margin-top: 0.4em;margin-right: 0.5em;">Fetch Another Random Sunspot</a>
-            </header>
-            <div class="card-content">
-              <div class="content">
-                {{ r.content }}
-              </div>
-            </div>
-            <footer class="card-footer">
-              <span class="card-footer-item">@{{ r.author }}</span>
-              <span href="#" class="card-footer-item"><time>{{ r.datetime }}</time></span>
-            </footer>
-          </div>
-        </div>
-        <hr>
-        <div class="card">
-            <header class="card-header is-vcentered">
-              <p class="card-header-title">
-                Recent Sunspots
-              </p>
-            </header>
-            <div v-for="r in recent.slice().reverse()" :key="r.datetime">
+              </header>
               <div class="card-content">
                 <div class="content">
                   {{ r.content }}
                 </div>
               </div>
               <footer class="card-footer" style="border-bottom:1px solid #dbdbdb;">
-                <span class="card-footer-item">@{{ r.author }}</span>
                 <span href="#" class="card-footer-item"><time>{{ r.datetime }}</time></span>
+                <span class="card-footer-item">Sunspot ID: {{ r.id }}</span>
               </footer>
           </div>
         </div>

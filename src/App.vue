@@ -15,13 +15,14 @@
       <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
           <a class="navbar-item">
-            <router-link to="/">Home</router-link>
+            <router-link to="/">Recent</router-link>
           </a>
-
+          <a class="navbar-item">
+            <router-link to="/random">Random</router-link>
+          </a>
           <a class="navbar-item">
             <router-link to="/about">About</router-link>
           </a>
-
         </div>
 
         <div class="navbar-end">
