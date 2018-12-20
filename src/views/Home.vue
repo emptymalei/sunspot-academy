@@ -1,9 +1,6 @@
 <template>
   <div class="container is-fluid home">
     <div class="columns">
-      <div class="column is-one-fifth">
-        <Introduction msg="The Sunspot"/>
-      </div>
       <div class="column">
         <Flow/>
       </div>
