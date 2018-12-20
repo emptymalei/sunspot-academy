@@ -19,7 +19,7 @@
               </div>
               <footer class="card-footer" style="border-bottom:1px solid #dbdbdb;">
                 <span href="#" class="card-footer-item"><time>{{ r.datetime }}</time></span>
-                <span class="card-footer-item">Sunspot ID: {{ r.id }}</span>
+                <span class="card-footer-item" style="overflow: hidden;display: inline-block;">Sunspot ID: {{ r.id }}</span>
               </footer>
           </div>
         </div>

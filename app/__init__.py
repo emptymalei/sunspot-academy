@@ -1,6 +1,8 @@
 import os
 from flask import Flask, current_app, send_file
 
+import urllib
+
 from .api import api_bp
 from .client import client_bp
 
@@ -35,7 +37,6 @@ def get_all_flow():
     output = []
 
     for record in flow.find():
-        print(record)
         output.append({
             'id': record.get('id'),
             'author': record.get('author'),
@@ -60,7 +61,6 @@ def get_random_flow(sample_size=None):
     output = []
 
     for record in flow.aggregate([{'$sample': {'size': sample_size }}]):
-        print(record)
         output.append({
             'id': record.get('id'),
             'author': record.get('author'),
@@ -85,7 +85,6 @@ def get_recent_flow(how_many=None):
     output = []
 
     for record in flow.find().sort('datetime',-1).limit(how_many):
-        print(record)
         output.append({
             'id': record.get('id'),
             'author': record.get('author'),
@@ -135,19 +134,18 @@ def get_one_flow_by_author(author):
 @app.route('/api/flow', methods=['POST'])
 def add_flow():
     flow = mongo.db.flow
-    print('flow is here:', flow)
 
     author = request.json['author']
     content = request.json['content']
     datetime = dt.datetime.now()
     flow_id = '{}_{}'.format(author,datetime.strftime("%s"))
 
-    flow_obj_id = flow.insert({
+    flow_obj_id = flow.insert(jsonify({
         'author' : author, 
         'content' : content,
         'datetime': datetime,
-        'id': flow_id
-        })
+        'id': urllib.parse.quote_plus(flow_id)
+        }))
     new_flow = flow.find_one({'id' : flow_id})
 
     output = {'id' : new_flow['id'], 'content' : new_flow['content']}
