@@ -144,7 +144,7 @@ def add_flow():
         'author' : author, 
         'content' : content,
         'datetime': datetime,
-        'id': urllib.parse.quote_plus(flow_id)
+        'id': flow_id
         }))
     new_flow = flow.find_one({'id' : flow_id})
 

@@ -19,7 +19,7 @@
             </div>
             <footer class="card-footer">
               <span href="#" class="card-footer-item"><time>{{ r.datetime }}</time></span>
-              <span class="card-footer-item">Sunspot ID: {{ r.id }}</span>
+              <span class="card-footer-item">Sunspot ID: <a v-bind:href="'/#/id?id='+ r.id">{{ r.id }}</a></span>
             </footer>
           </div>
 

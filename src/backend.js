@@ -28,6 +28,12 @@ export default {
       .then(response => response.data)
   },
 
+  fetchFlowByID (FlowId) {
+    console.log(`flow/id/` + FlowId)
+    return $axios.get(`flow/id/` + FlowId)
+      .then(response => response.data)
+  },
+
   fetchRandomFlow () {
     return $axios.get(`flow/random`)
       .then(response => response.data)

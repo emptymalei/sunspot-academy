@@ -19,7 +19,7 @@
               </div>
               <footer class="card-footer" style="border-bottom:1px solid #dbdbdb;">
                 <span href="#" class="card-footer-item"><time>{{ r.datetime }}</time></span>
-                <span class="card-footer-item" style="overflow: hidden;display: inline-block;">Sunspot ID: {{ r.id }}</span>
+                <span class="card-footer-item" style="overflow: hidden;display: inline-block;">Sunspot ID: <a v-bind:href="'/#/id?id='+r.id">{{ r.id }}</a></span>
               </footer>
           </div>
         </div>
@@ -39,7 +39,7 @@
           <form>
           <b-field horizontal label="Author">
             <b-input name="name" placeholder="Display ID" v-model="oneflow.author" expanded></b-input>
-            <span class='warning'>This will appear alongside the content.</span>
+            <span class='warning'>This will appear alongside the content. Do not use ; / ? : @ = & "</span>
           </b-field>
           <b-field horizontal label="Sunspot">
             <b-input type="textarea" v-model="oneflow.content"></b-input>

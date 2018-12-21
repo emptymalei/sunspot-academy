@@ -27,7 +27,10 @@ export default new Router({
     {
       path: '/id',
       name: 'id',
-      component: ID
+      component: ID,
+      props: (route) => ({
+        id: route.query.id
+      })
     }
   ]
 })

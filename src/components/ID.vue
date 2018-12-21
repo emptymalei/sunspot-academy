@@ -5,21 +5,21 @@
         <p>Sunspot</p>
       </div>
       <div class="message-body">
-        <div v-for="r in flow" :key="r.datetime" style="margin-top:1em;">
+        <div style="margin-top:1em;">
           <div class="card">
             <header class="card-header is-vcentered">
               <p class="card-header-title">
-                {{ r.author }}:
+                {{ flow.author }}:
               </p>
             </header>
             <div class="card-content">
               <div class="content">
-                {{ r.content }}
+                {{ flow.content }}
               </div>
             </div>
             <footer class="card-footer">
-              <span href="#" class="card-footer-item"><time>{{ r.datetime }}</time></span>
-              <span class="card-footer-item">Sunspot ID: {{ r.id }}</span>
+              <span href="#" class="card-footer-item"><time>{{ flow.datetime }}</time></span>
+              <span class="card-footer-item">Sunspot ID: <a v-bind:href="'/#/id?id='+ flow.id">{{ flow.id }}</a></span>
             </footer>
           </div>
         </div>
@@ -39,11 +39,6 @@ export default {
     return {
       resources: [],
       flow: [],
-      recent: [],
-      oneflow: {
-        author: '',
-        content: ''
-      },
       error: ''
     }
   },
@@ -57,7 +52,7 @@ export default {
         })
     },
     fetchFlowByID () {
-      $backend.fetchRandomFlow()
+      $backend.fetchFlowByID(this.$route.query.id)
         .then(responseData => {
           this.flow = responseData.result
         }).catch(error => {
