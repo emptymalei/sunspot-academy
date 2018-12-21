@@ -29,8 +29,9 @@ This website is currently hosted on Heroku.
 
 ## Development
 
-* 
+This website is built on flask and vue+webpack. The backend located at `app/*` is the API that provides the data interface. The frontend located at `src/*` and `public/*` is in charge of the interactions with API and the user interfaces.
 
+`yarn install` will install the packages specified in the file `package.json`. `yarn build` will generate the static pages and place them in the folder `dist`. Then flask will render these frontend assets live when we excute `python run.py`.
 
 ## References
 
