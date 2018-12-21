@@ -1,4 +1,5 @@
 import axios from 'axios'
+const marked = require('marked')
 
 let $axios = axios.create({
   baseURL: '/api/',
@@ -22,6 +23,10 @@ $axios.interceptors.response.use(function (response) {
 })
 
 export default {
+
+  markUpContent (content) {
+    return marked(content)
+  },
 
   fetchFlow () {
     return $axios.get(`flow`)

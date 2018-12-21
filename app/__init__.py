@@ -1,12 +1,12 @@
 import os
 from flask import Flask, current_app, send_file
 
-import urllib
+import logging
 
 from .api import api_bp
 from .client import client_bp
 
-from flask import jsonify, request
+from flask import jsonify, request, Markup
 from flask_pymongo import PyMongo
 
 import datetime as dt
@@ -136,7 +136,7 @@ def add_flow():
     flow = mongo.db.flow
 
     author = request.json['author']
-    content = request.json['content']
+    content = Markup.escape(request.json['content'])
     datetime = dt.datetime.now()
     flow_id = '{}_{}'.format(author,datetime.strftime("%s"))
 
@@ -146,6 +146,8 @@ def add_flow():
         'datetime': datetime,
         'id': flow_id
         })
+    app.logger.info(flow_id)
+    app.logger.info(content)
     new_flow = flow.find_one({'id' : flow_id})
 
     output = {'id' : new_flow['id'], 'content' : new_flow['content']}

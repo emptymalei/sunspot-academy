@@ -13,8 +13,7 @@
               </p>
               </header>
               <div class="card-content">
-                <div class="content">
-                  {{ r.content }}
+                <div class="content" v-html="markUpContent(r.content)">
                 </div>
               </div>
               <footer class="card-footer" style="border-bottom:1px solid #dbdbdb;">
@@ -38,11 +37,11 @@
         </p>
           <form>
           <b-field horizontal label="Author">
-            <b-input name="name" placeholder="Display ID" maxlength="15" v-model="oneflow.author" expanded></b-input>
+            <b-input name="name" placeholder="Display ID" maxlength="15" v-model="oneflow.author" expanded required></b-input>
             <span class='warning' type="is-danger">This will appear alongside the content. Do not use ; / ? : @ = & "</span>
           </b-field>
           <b-field horizontal label="Sunspot" :message="['Do not disclose personal information', 'No editing once submitted', 'create a issue if you need help: https://github.com/emptymalei/sunspot-academy/issues']">
-            <b-input type="textarea" v-model="oneflow.content"></b-input>
+            <b-input type="textarea" v-model="oneflow.content" maxlength="5000" required></b-input>
           </b-field>
           <b-field horizontal>
             <!-- Label left empty for spacing -->
@@ -82,6 +81,9 @@ export default {
     }
   },
   methods: {
+    markUpContent (content) {
+      return $backend.markUpContent(content)
+    },
     fetchFlow () {
       $backend.fetchFlow()
         .then(responseData => {
@@ -107,17 +109,22 @@ export default {
         })
     },
     postFlow () {
-      $backend.postFlow(this.oneflow.author, this.oneflow.content)
-      this.oneflow.author = ''
-      this.oneflow.content = ''
-      this.submitButton.text = 'Submitted!'
-      this.submitButton.submitted = true
-      $backend.fetchRecentFlow()
-        .then(responseData => {
-          this.recent = responseData.result
-        }).catch(error => {
-          this.error = error.message
-        })
+      if (this.oneflow.author === '' | this.oneflow.content === '') {
+        this.submitButton.text = 'Finish your sunspot and submit again'
+        this.submitButton.submitted = false
+      } else {
+        $backend.postFlow(this.oneflow.author, this.oneflow.content)
+        this.oneflow.author = ''
+        this.oneflow.content = ''
+        this.submitButton.text = 'Submitted!'
+        this.submitButton.submitted = true
+        $backend.fetchRecentFlow()
+          .then(responseData => {
+            this.recent = responseData.result
+          }).catch(error => {
+            this.error = error.message
+          })
+      }
     }
   },
   mounted: function () {
