@@ -140,12 +140,12 @@ def add_flow():
     datetime = dt.datetime.now()
     flow_id = '{}_{}'.format(author,datetime.strftime("%s"))
 
-    flow_obj_id = flow.insert(jsonify({
+    flow_obj_id = flow.insert({
         'author' : author, 
         'content' : content,
         'datetime': datetime,
         'id': flow_id
-        }))
+        })
     new_flow = flow.find_one({'id' : flow_id})
 
     output = {'id' : new_flow['id'], 'content' : new_flow['content']}
