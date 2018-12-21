@@ -38,10 +38,10 @@
         </p>
           <form>
           <b-field horizontal label="Author">
-            <b-input name="name" placeholder="Display ID" v-model="oneflow.author" expanded></b-input>
-            <span class='warning'>This will appear alongside the content. Do not use ; / ? : @ = & "</span>
+            <b-input name="name" placeholder="Display ID" maxlength="15" v-model="oneflow.author" expanded></b-input>
+            <span class='warning' type="is-danger">This will appear alongside the content. Do not use ; / ? : @ = & "</span>
           </b-field>
-          <b-field horizontal label="Sunspot">
+          <b-field horizontal label="Sunspot" :message="['Do not disclose personal information', 'No editing once submitted', 'create a issue if you need help: https://github.com/emptymalei/sunspot-academy/issues']">
             <b-input type="textarea" v-model="oneflow.content"></b-input>
           </b-field>
           <b-field horizontal>
