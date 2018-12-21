@@ -10,7 +10,9 @@ from flask import jsonify, request, Markup
 from flask_pymongo import PyMongo
 
 import datetime as dt
+from flask_restplus import Resource
 
+from .api import api_rest
 
 app = Flask(__name__, static_folder='../dist/static')
 app.register_blueprint(api_bp)
@@ -20,8 +22,6 @@ from .config import Config
 app.logger.info('>>> {}'.format(Config.FLASK_ENV))
 
 mongo = PyMongo(app)
-print(mongo.db.flow)
-print(mongo.db.collection_names(include_system_collections=False) )
 
 @app.route('/')
 def index_client():
@@ -30,22 +30,46 @@ def index_client():
     return send_file(entry)
 
 
-@app.route('/api/flow', methods=['GET'])
-def get_all_flow():
-    flow = mongo.db.flow
+# @app.route('/api/flow', methods=['GET'])
+# def get_all_flow():
+#     """Get all flow
+#     """
+#     flow = mongo.db.flow
 
-    output = []
+#     output = []
 
-    for record in flow.find():
-        output.append({
-            'id': record.get('id'),
-            'author': record.get('author'),
-            'datetime': record.get('datetime'),
-            'content': record.get('content')
-        })
+#     for record in flow.find():
+#         output.append({
+#             'id': record.get('id'),
+#             'author': record.get('author'),
+#             'datetime': record.get('datetime'),
+#             'content': record.get('content')
+#         })
 
 
-    return jsonify({'result' : output})
+#     return jsonify({'result' : output})
+
+@api_rest.route('/api/flow')
+class All_Sunspot(Resource):
+    """
+    """
+    def get(self):
+        """Get all flow
+        """
+        flow = mongo.db.flow
+
+        output = []
+
+        for record in flow.find():
+            output.append({
+                'id': record.get('id'),
+                'author': record.get('author'),
+                'datetime': record.get('datetime'),
+                'content': record.get('content')
+            })
+
+        return jsonify({'result' : output})
+
 
 @app.route('/api/flow/random', defaults={'sample_size': None})
 @app.route('/api/flow/random/<sample_size>', methods=['GET'])
@@ -68,8 +92,8 @@ def get_random_flow(sample_size=None):
             'content': record.get('content')
         })
 
-
     return jsonify({'result' : output})
+
 
 @app.route('/api/flow/recent', defaults={'how_many': 1})
 @app.route('/api/flow/recent/<how_many>', methods=['GET'])
@@ -95,23 +119,28 @@ def get_recent_flow(how_many=None):
     return jsonify({'result' : output})
 
 
-@app.route('/api/flow/id/<id>', methods=['GET'])
-def get_one_flow_by_id(id):
-    flow = mongo.db.flow
+@api_rest.route('/flow/id/<string:id>')
+class Get_One_Flow_By_ID(Resource):
+    """ Get one sunspot by id: Inherit from Resource """
 
-    record = flow.find_one({'id' : id})
+    def get(self, id):
+        """Get a sunspot
+        """
+        flow = mongo.db.flow
 
-    if record:
-        output = {
-            'id': record.get('id'),
-            'author': record.get('author'),
-            'datetime': record.get('datetime'),
-            'content': record.get('content')
-        }
-    else:
-        output = 'No flow found'
+        record = flow.find_one({'id' : id})
 
-    return jsonify({'result' : output})
+        if record:
+            output = {
+                'id': record.get('id'),
+                'author': record.get('author'),
+                'datetime': record.get('datetime'),
+                'content': record.get('content')
+            }
+        else:
+            output = 'No flow found'
+
+        return jsonify({'result' : output})
 
 @app.route('/api/flow/author/<author>', methods=['GET'])
 def get_one_flow_by_author(author):

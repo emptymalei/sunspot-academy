@@ -16,23 +16,23 @@ class SecureResource(Resource):
     method_decorators = [require_auth]
 
 
-@api_rest.route('/resource/<string:resource_id>')
+@api_rest.route('/server/<string:resource_id>')
 class ResourceOne(Resource):
     """ Unsecure Resource Class: Inherit from Resource """
 
     def get(self, resource_id):
         timestamp = datetime.utcnow().isoformat()
-        return {'timestamp': timestamp}
+        return {'result': {'timestamp': timestamp, 'resource_id': resource_id} }
 
     def post(self, resource_id):
         json_payload = request.json
         return {'timestamp': json_payload}, 201
 
 
-@api_rest.route('/secure-resource/<string:resource_id>')
+@api_rest.route('/secure-server/<string:resource_id>')
 class SecureResourceOne(SecureResource):
     """ Unsecure Resource Class: Inherit from Resource """
 
     def get(self, resource_id):
         timestamp = datetime.utcnow().isoformat()
-        return {'timestamp': timestamp}
+        return {'result': {'timestamp': timestamp, 'resource_id': resource_id} }
