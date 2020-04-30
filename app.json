@@ -24,8 +24,5 @@
     {
       "url": "heroku/python"
     }
-  ],
-  "engines": {
-    "node": "12.16.x"
-  }
+  ]
 }
