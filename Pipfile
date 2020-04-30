@@ -9,6 +9,7 @@ flask-restplus = "*"
 python-dotenv = "*"
 flask = "*"
 Flask-PyMongo = "*"
+flask-cors = "*"
 
 [dev-packages]
 pytest = "*"

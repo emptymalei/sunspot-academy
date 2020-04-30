@@ -8,6 +8,7 @@ from .client import client_bp
 
 from flask import jsonify, request, Markup
 from flask_pymongo import PyMongo
+from flask_cors import CORS
 
 import datetime as dt
 from flask_restplus import Resource
@@ -15,6 +16,7 @@ from flask_restplus import Resource
 from .api import api_rest
 
 app = Flask(__name__, static_folder='../dist/static')
+cors = CORS(app)
 app.register_blueprint(api_bp)
 # app.register_blueprint(client_bp)
 
@@ -74,7 +76,7 @@ class All_Sunspot(Resource):
 @app.route('/api/flow/random', defaults={'sample_size': None})
 @app.route('/api/flow/random/<sample_size>', methods=['GET'])
 def get_random_flow(sample_size=None):
-    
+
     if sample_size is None:
         sample_size = 1
     else:
@@ -170,7 +172,7 @@ def add_flow():
     flow_id = '{}_{}'.format(author,datetime.strftime("%s"))
 
     flow_obj_id = flow.insert({
-        'author' : author, 
+        'author' : author,
         'content' : content,
         'datetime': datetime,
         'id': flow_id
